@@ -12,21 +12,18 @@ public class SearchModelImpl implements SearchModel {
 
     @Override
     public void search(final String queryString, final OnSearchFinishedListener onSearchFinishedListener) {
-        // Mock login. I'm creating a handler to delay the answer a couple of seconds
         new Handler().postDelayed(new Runnable() {
             @Override public void run() {
                 if (TextUtils.isEmpty(queryString)){
                     onSearchFinishedListener.onError();
                 } else {
-                    Search.Builder builder = new Search.Builder();
-                    builder
-                            .withQuery(queryString)
-                            .withPaging(new Paging.Builder().withTotal(0).build())
-                            .withResults(new ArrayList<Item>() {{
-                                add(new Item.Builder().withTitle("nexus 5").build());
-                                add(new Item.Builder().withTitle("nexus 4").build());
-                            }});
-                    onSearchFinishedListener.onSuccess(builder.build());
+                    final Item item1 = new Item("nexus 5");
+                    final Item item2 = new Item("nexus 4");
+                    Search search = new Search(queryString, null, new ArrayList<Item>() {{
+                        add(item1);
+                        add(item2);
+                    }});
+                    onSearchFinishedListener.onSuccess(search);
                 }
             }
         }, 2000);

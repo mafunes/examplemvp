@@ -74,6 +74,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void navigateToSearchResult(Search search) {
-        startActivity(new Intent(this, SearchResultActivity.class).putExtra(SearchResultActivity.RESULT, search));
+        startActivity(new Intent(getApplicationContext(), SearchResultActivity.class).putExtra(SearchResultActivity.RESULTS, search.results));
     }
 }
