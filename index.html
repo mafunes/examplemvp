@@ -1,4 +1,96 @@
+<html>
+	<head>
+		<script type='text/javascript' src='https://http2.mlstatic.com/resources/frontend/statics/mobile/webkit/v1.0.0/mobilewebkit.js'></script>
+
+		<script type="text/javascript">
+			function getContextInfo() {
+				MobileWebKit.executeNative({
+					"method": 'context_info',
+					"timeout": 10,
+					"callback": function(result, error) {
+						document.getElementById("textareaContent").value = JSON.stringify({result:result, error:error}, null, 4);
+					}
+				});
+			}
+
+			function openInternalDeeplink() {
+				var deeplink = document.getElementById('inputInternalDeeplink').value;
+				MobileWebKit.executeNative({
+					"method": 'open_internal_deeplink',
+					"args": {
+						'deeplink': deeplink
+					},
+					"callback": function(result, error) {
+						document.getElementById("textareaContent").value = JSON.stringify({result:result, error:error}, null, 4);
+					}
+				});
+			}
+
+			function openExternalDeeplink() {
+				var deeplink = document.getElementById('inputExternalDeeplink').value;
+				MobileWebKit.executeNative({
+					"method": 'open_external_deeplink',
+					"args": {
+						'deeplink': deeplink
+					},
+					"callback": function(result, error) {
+						document.getElementById("textareaContent").value = JSON.stringify({result:result, error:error}, null, 4);
+					}
+				});
+			}
+
+			function openInternalUrl() {
+				var url = document.getElementById('inputInternalUrl').value;
+				MobileWebKit.executeNative({
+					"method": 'open_internal_url',
+					"args": {
+						'url': url
+					},
+					"callback": function(result, error) {
+						document.getElementById("textareaContent").value = JSON.stringify({result:result, error:error}, null, 4);
+					}
+				});
+			}
+
+			function openExternalUrl() {
+				var url = document.getElementById('inputExternalUrl').value;
+				MobileWebKit.executeNative({
+					"method": 'open_external_url',
+					"args": {
+						'url': url
+					},
+					"callback": function(result, error) {
+						document.getElementById("textareaContent").value = JSON.stringify({result:result, error:error}, null, 4);
+					}
+				});
+			}
+
+		</script>
+	</head>
+
 <h2>Tester</h2><a
-href="intent://media?id=test#Intent;scheme=instagram;package=com.instagram.android;S.browser_fallback_url=https%3A%2F%2Fwww.google.com.ar%2F;end"> Share on Instagram </a>
+href="intent://media?id=test#Intent;scheme=instagram;package=com.instagram.android;S.browser_fallback_url=https%3A%2F%2Fwww.google.com.ar%2F;end"> Share on Instagram (intent)</a>
 <p/>
-<a href="instagram://user?username=untitled.tiff">test..</a>
+<a href="instagram://user?username=untitled.tiff">test deeplinlk</a>
+
+<p/>
+
+	<body>
+		Pantalla 0 <br/>
+
+		<input id="inputInternalDeeplink" onclick=""> <button onclick="javascript: openInternalDeeplink();">Abrir deeplink internamente</button> <br/>
+
+		<input id="inputExternalDeeplink" onclick=""> <button onclick="javascript: openExternalDeeplink();">Abrir deeplink externamente</button> <br/>
+		
+		<input id="inputInternalUrl" onclick=""> <button onclick="javascript: openInternalUrl();">Abrir url internamente</button> <br/>
+
+		<input id="inputExternalUrl" onclick=""> <button onclick="javascript: openExternalUrl();">Abrir url externamente</button> <br/>
+
+		<br/>
+		Context Info <br/>
+		<button onclick="javascript: getContextInfo();">Context Info</button> <br/>
+
+		Response: <br/>
+        <textarea id="textareaContent" style="width:100%; height:70%"></textarea>  <br/>
+	</body>
+</html>
